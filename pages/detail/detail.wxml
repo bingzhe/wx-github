@@ -1,3 +1,36 @@
 <view class="container">
+    <!-- 基本信息 -->
+    <view class="base-content flex-box">
+        <view class="user-avater">
+            <image class="avater-icon" src="{{ userinfo.avatar_url }}"></image>
+        </view>
+        <view class="user-detail flex-box flex-direction main-space">
+            <view class="user-name">{{ userinfo.login }}</view>
+            <view class="flex-box detail-item cross-center" wx:for="{{userinfoArr}}" wx:key="{{item.value}}">
+                <image class="detail-icon" mode="aspectFit" src="{{item.icon}}"></image>
+                <text>{{ item.label }}</text>
+            </view>
+        </view>
+    </view>
 
+    <!-- profile -->
+    <view class="profile-content">
+        <view class="section-title">Profile</view>
+        <view class="profile-text">
+            <text>{{ userinfo.bio }}</text>
+        </view>
+    </view>
+    <!-- language -->
+    <view class="language-content">
+        <view class="section-title">Language</view>
+        <view></view>
+    </view>
+    <!-- repositories -->
+    <view class="repositories-content">
+        <view class="section-title">Repositories</view>
+    </view>
+    <!-- contribution -->
+    <view class="contribution-content">
+        <view class="section-title">Contribution</view>
+    </view>
 </view>
