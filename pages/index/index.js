@@ -4,51 +4,95 @@ const app = getApp()
 
 Page({
   data: {
-    motto: 'Hello World',
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    name: "",
+    detail: {}
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
+  bindInputName(e) {
+    this.setData({
+      name: e.detail.value
     })
   },
-  onLoad: function () {
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
+
+  //取到user
+  getUserinfo() {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: 'https://api.github.com/users/' + this.data.name,
+        success: function (resp) {
+          if (resp.statusCode === 200) {
+            app.globalData.userinfo = resp.data
+            resolve()
+          } else {
+            wx.showModal({
+              content: '没查找到ID,请确认输入',
+              confirmText: '关闭',
+              showCancel: false,
+            })
+          }
+        },
+        fail: function (resp) {
+          reject(resp)
         }
       })
-    }
-  },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
+  },
+
+  //取到repository
+  getRepoinfo() {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: 'https://api.github.com/users/' + this.data.name + '/repos?per_page=100',
+        success: function (resp) {
+          if (resp.statusCode === 200) {
+            app.globalData.repoinfo = resp.data
+            resolve()
+          }
+        },
+        fail: function (resp) {
+          reject(resp)
+        }
+      })
+    })
+  },
+
+  //取到pr
+  getPrinfo() {
+    return new Promise((resolve, reject) => {
+      wx.request({
+        url: 'https://api.github.com/search/issues?q=type:pr+is:merged+author:'
+          + this.data.name + '&per_page=100',
+        success: function (resp) {
+          if (resp.statusCode === 200) {
+            app.globalData.prinfo = resp.data
+            console.log(app.globalData)
+            wx.navigateTo({
+              url: '../logs/logs'
+            })
+            resolve()
+          }
+        },
+        fail: function (resp) {
+          reject(resp)
+        }
+      })
+    })
+
+  },
+
+  //查找获取数据
+  bindSearch() {
+    if (!this.data.name) {
+      wx.showModal({
+        content: '请输入Github ID',
+        confirmText: '关闭',
+        showCancel: false,
+      })
+      return
+    }
+
+    this.getUserinfo().then(this.getRepoinfo).then(this.getPrinfo);
+
+
   }
+  //取到
 })
