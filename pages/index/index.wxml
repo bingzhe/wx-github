@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
-  <image class="icon" src="http://www.ranzhouli.cn/blog/wp-content/uploads/2018/04/githubicon.jpg" mode="aspectFit"></image>
+  <image class="icon" src="../../images/githubicon.jpg" mode="aspectFit"></image>
   <input class="input-name" placeholder='请输入Github ID' value="{{ name }}" bindinput='bindInputName'></input>
   <button class="confrim-btn" type="primary" bindtap="bindSearch">确定</button>
 </view>

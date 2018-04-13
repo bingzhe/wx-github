@@ -19,6 +19,7 @@ Page({
       wx.request({
         url: 'https://api.github.com/users/' + this.data.name,
         success: function (resp) {
+          wx.hideToast();
           if (resp.statusCode === 200) {
             app.globalData.userinfo = resp.data
             resolve()
@@ -63,10 +64,12 @@ Page({
           + this.data.name + '&per_page=100',
         success: function (resp) {
           if (resp.statusCode === 200) {
+            wx.hideToast();
+            
             app.globalData.prinfo = resp.data
-            console.log(app.globalData)
+
             wx.navigateTo({
-              url: '../logs/logs'
+              url: '../detail/detail'
             })
             resolve()
           }
@@ -89,6 +92,12 @@ Page({
       })
       return
     }
+
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 20000
+    });
 
     this.getUserinfo().then(this.getRepoinfo).then(this.getPrinfo);
 
