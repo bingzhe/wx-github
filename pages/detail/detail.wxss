@@ -1,49 +1,111 @@
 /* 基本信息 */
 
 .container {
-    margin: 20rpx;
+  margin: 20rpx;
 }
 
 .base-content {
-    margin: 20rpx 0;
+  margin: 20rpx 0;
 }
 
 .avater-icon {
-    width: 240rpx;
-    height: 240rpx;
-    margin-right: 20rpx;
+  width: 240rpx;
+  height: 240rpx;
+  margin-right: 20rpx;
 }
 
 .user-detail {
-    height: 240rpx;
+  height: 240rpx;
 }
 
 .detail-item {
-    font-size: 30rpx;
+  font-size: 30rpx;
 }
 
 .user-name {
-    font-weight: bold;
-    font-size: 36rpx;
+  font-weight: bold;
+  font-size: 36rpx;
 }
 
 .detail-icon {
-    width: 30rpx;
-    height: 30rpx;
-    margin-right: 14rpx;
+  width: 30rpx;
+  height: 30rpx;
+  margin-right: 14rpx;
 }
 
 /* profile */
 
 .section-title {
-    font-weight: bold;
-    font-style: italic;
-    font-size: 36rpx;
-    border-left: 10rpx solid #ccc;
-    padding-left: 10rpx;
+  font-style: italic;
+  font-size: 38rpx;
+  border-left: 10rpx solid #ccc;
+  padding-left: 10rpx;
+  margin-bottom: 30rpx;
 }
 
 .profile-text {
-    font-size: 30rpx;
-    text-indent: 30rpx;
+  font-size: 30rpx;
+  /* text-indent: 30rpx; */
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.profile-text text {
+  display: inline-block;
+  padding: 20prx 0 10rpx;
+}
+
+.language-content {
+  margin-bottom: 20rpx;
+  border-bottom: 1px solid #ccc;
+}
+
+.language-collect {
+  padding-left: 30rpx;
+}
+
+.language-item {
+  height: 60rpx;
+  line-height: 60rpx;
+}
+
+.language-item text:first-child {
+  padding-right: 10rpx;
+  color: #990003;
+}
+
+/* repositories */
+
+.repositories-content {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 20rpx;
+  padding-bottom: 15rpx;
+}
+
+.repo-name {
+  display: block;
+  height: 60rpx;
+  line-height: 60rpx;
+  color: #990003;
+}
+
+.repo-desc {
+  margin-right: 20rpx;
+}
+
+.repo {
+  margin-bottom: 15rpx;
+}
+
+.repo:last-child {
+  margin-bottom: 0rpx;
+}
+
+.repo-popu {
+  font-size: 30rpx;
+}
+
+.highlight {
+  color: #990003;
 }

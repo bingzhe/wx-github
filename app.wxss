@@ -1,5 +1,8 @@
 /**app.wxss**/
 
+.container{
+  font-family: Georgia, Garamond, "Times New Roman", Times, serif;
+}
 .flex-box {
     display: -webkit-box;
     display: -moz-box;

@@ -17,20 +17,42 @@
     <view class="profile-content">
         <view class="section-title">Profile</view>
         <view class="profile-text">
-            <text>{{ userinfo.bio }}</text>
+            On Github since 
+            <text class="highlight">{{ userinfo.year }}</text>, {{ userinfo.login }} is a developer based in {{ userinfo.location }} with
+            <text class="highlight">{{ userinfo.public_repos }}</text> public repositories and 
+            <text class="highlight">{{ userinfo.followers }}</text> followers.
         </view>
     </view>
     <!-- language -->
     <view class="language-content">
         <view class="section-title">Language</view>
-        <view></view>
+        <view class="language-collect">
+            <view class="language-item" wx:for="{{language}}" :wx:key="item.name">
+                <text>{{ item.name }}：</text>
+                <text>{{ item.percent }}%</text>
+            </view>
+        </view>
     </view>
     <!-- repositories -->
     <view class="repositories-content">
         <view class="section-title">Repositories</view>
+        <block wx:for="{{ repo }}" wx:key="{{ item.name }}">
+			<view class="repo">
+				<text class="repo-name">{{ item.name }}</text>
+				<text class="repo-desc">{{ item.description }}</text>
+				<text class="repo-popu">This repository has {{ item.stargazers_count }} <block wx:if="{{ item.stargazers_count > 1 }}">stars</block><block wx:else>star</block> {{ item.forks_count }} <block wx:if="{{ item.forks_count > 1 }}">forks</block><block wx:else>fork</block>
+				</text>
+			</view>
+		</block>
     </view>
     <!-- contribution -->
     <view class="contribution-content">
         <view class="section-title">Contribution</view>
+		<block wx:for="{{ prs }}" wx:key="{{ item.name }}">
+			<view class="repo">
+				<text class="repo-name">{{ item.name }}</text>
+				<text class="repo-popu">{{ user.name }} has contributed for  {{ item.popularity }} commit(s)</text>
+			</view>
+		</block>        
     </view>
 </view>
