@@ -1,5 +1,5 @@
-const app = getApp();
-console.log(app)
+const app = getApp()
+const util = require('../../utils/util')
 
 Page({
     data: {
@@ -9,17 +9,25 @@ Page({
         language: [],
     },
     onLoad() {
-        var repo = app.globalData.repoinfo.filter(item => {
+        //userinfo
+        let userinfo = app.globalData.userinfo;
+        userinfo.ctime_str = util.getYear(new Date(userinfo.created_at))
+        userinfo.name_str = userinfo.name ? userinfo.name : userinfo.login
+        userinfo.name_upper = userinfo.name_str.toUpperCase()
+        
+        //repo
+        let repo = app.globalData.repoinfo.filter(item => {
             return !item.fork
         })
         repo.sort((a, b) => {
-            return (this.computePopularity(a) < this.computePopularity(b))
-        })
+            return this.computePopularity(a) - this.computePopularity(b)
+        }).reverse()
 
-        var prs = this.collectPr(app.globalData.prinfo.items)
-        prs.sort(function (p, c) {
-            return p.popularity < c.popularity;
-        })
+        //prs
+        let prs = this.collectPr(app.globalData.prinfo.items)
+        prs.sort(function (a, b) {
+            return a.popularity - b.popularity;
+        }).reverse()
 
         this.setData({
             userinfo: app.globalData.userinfo,
@@ -42,7 +50,7 @@ Page({
                     popularity: 1
                 }
             } else {
-                language[lang] += 1
+                language[lang].popularity += 1
             }
 
             total += 1

@@ -24,7 +24,7 @@
 
 .user-name {
   font-weight: bold;
-  font-size: 36rpx;
+  font-size: 48rpx;
 }
 
 .detail-icon {
@@ -88,6 +88,7 @@
 
 .repo-desc {
   display: block;
+  font-size: 36rpx;
 }
 
 .repo {

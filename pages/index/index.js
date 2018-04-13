@@ -19,11 +19,12 @@ Page({
       wx.request({
         url: 'https://api.github.com/users/' + this.data.name,
         success: function (resp) {
-          wx.hideToast();
+
           if (resp.statusCode === 200) {
             app.globalData.userinfo = resp.data
             resolve()
           } else {
+            wx.hideToast();
             wx.showModal({
               content: '没查找到ID,请确认输入',
               confirmText: '关闭',
@@ -65,7 +66,7 @@ Page({
         success: function (resp) {
           if (resp.statusCode === 200) {
             wx.hideToast();
-            
+
             app.globalData.prinfo = resp.data
 
             wx.navigateTo({

@@ -5,10 +5,10 @@
             <image class="avater-icon" src="{{ userinfo.avatar_url }}"></image>
         </view>
         <view class="user-detail ">
-            <view class="user-name">{{ userinfo.login }}</view>
+            <view class="user-name">{{ userinfo.name_upper }}</view>
             <view class="profile-text">
                 On Github since 
-                <text class="highlight">{{ userinfo.year }}</text>, {{ userinfo.login }} is a developer based in {{ userinfo.location }} with
+                <text class="highlight">{{ userinfo.ctime_str }}</text>, {{ userinfo.name_str }} is a developer based in {{ userinfo.location }} with
                 <text class="highlight">{{ userinfo.public_repos }}</text> public repositories and 
                 <text class="highlight">{{ userinfo.followers }}</text> followers.
             </view>
@@ -41,7 +41,7 @@
         <block wx:for="{{ repo }}" wx:key="{{ item.name }}">
 			<view class="repo">
 				<text class="repo-name">{{ item.name }}</text>
-				<text class="repo-desc">{{ item.description }}</text>
+				<text wx:if="{{item.description}}" class="repo-desc">{{ item.description }}</text>
 				<text class="repo-popu">This repository has {{ item.stargazers_count }} <block wx:if="{{ item.stargazers_count > 1 }}">stars</block><block wx:else>star</block> {{ item.forks_count }} <block wx:if="{{ item.forks_count > 1 }}">forks</block><block wx:else>fork</block>
 				</text>
 			</view>
