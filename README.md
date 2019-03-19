@@ -4,4 +4,3 @@
 
 ![example](./images/git.gif)
 
-照着[这个项目](https://github.com/monkindey/wx-github)做的
